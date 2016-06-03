@@ -1,0 +1,47 @@
+﻿@model CarLookUp.Web.ViewModels.CarVM
+
+    @{
+        ViewBag.Title = "Delete";
+    }
+
+    <h2>Delete</h2>
+
+    <h3>Are you sure you want to delete @Model.Year @Model.Maker @Model.Model?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Maker)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Maker)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Model)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Model)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Year)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Year)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
