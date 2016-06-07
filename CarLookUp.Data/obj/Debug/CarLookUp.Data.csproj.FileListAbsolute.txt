@@ -16,3 +16,10 @@ C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Da
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Data\obj\Debug\CarLookUp.Data.csproj.GenerateResource.Cache
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Data\bin\Debug\AutoMapper.dll
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Data\bin\Debug\AutoMapper.xml
+C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Data\bin\Debug\EntityFramework.Extended.dll
+C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Data\bin\Debug\EntityFramework.Extended.xml
+C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Data\obj\Debug\CarLookUp.Data.Migrations.roles.resources
+C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Data\bin\Debug\Elmah.dll
+C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Data\bin\Debug\Elmah.SqlServer.EFInitializer.dll
+C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Data\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Data\bin\Debug\WebActivatorEx.dll

@@ -14,6 +14,14 @@ namespace CarLookUp.Data.Migrations
 
         protected override void Seed(CarLookUp.Data.Context.CarContext context)
         {
+            var roles = new List<Role>()
+            {
+                new Role { Id=1, Name="User"},
+                new Role { Id=2, Name="Admin" }
+            };
+            roles.ForEach(r => context.Roles.AddOrUpdate(p => p.Name, r));
+            context.SaveChanges();
+
             var bodyTypes = new List<BodyType>()
             {
                 new BodyType {Id = 1, TypeOfBody="Sedan" },

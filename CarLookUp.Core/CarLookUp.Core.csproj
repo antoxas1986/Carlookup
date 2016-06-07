@@ -40,7 +40,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,13 +52,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationSettings\BaseApplicationSettings.cs" />
+    <Compile Include="ApplicationSettings\TestApplicationSettings.cs" />
+    <Compile Include="Constants\ErrorMessages.cs" />
+    <Compile Include="Constants\Roles.cs" />
     <Compile Include="Constants\EmailSettings.cs" />
+    <Compile Include="Enum\MessageTypes.cs" />
+    <Compile Include="Exceptions\ApplicationSettingsException.cs" />
     <Compile Include="Ioc\IocModule.cs" />
     <Compile Include="Mappers\Interfaces\ICustomMapper.cs" />
     <Compile Include="Models\BodyTypeDTO.cs" />
-    <Compile Include="Models\CarDTOWithBodyTypeName .cs" />
+    <Compile Include="Models\CarDTOWithBodyType.cs" />
     <Compile Include="Models\CarDTO.cs" />
+    <Compile Include="Models\RoleDTO.cs" />
+    <Compile Include="Models\UserDTO.cs" />
+    <Compile Include="Models\ValidationMassageList.cs" />
+    <Compile Include="Models\ValidationMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\BaseCachingProvider.cs" />
+    <Compile Include="Constants\CacheKeys.cs" />
+    <Compile Include="Utilities\GlobalCachingProvider.cs" />
+    <Compile Include="Utilities\SessionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

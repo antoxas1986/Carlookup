@@ -11,3 +11,8 @@ C:\Users\akuznetsov\documents\visual studio 2015\Projects\CarLookUp\CarLookUp.Se
 C:\Users\akuznetsov\documents\visual studio 2015\Projects\CarLookUp\CarLookUp.Services\bin\Debug\Autofac.xml
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Services\bin\Debug\AutoMapper.dll
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Services\bin\Debug\AutoMapper.xml
+C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Services\bin\Debug\EntityFramework.Extended.dll
+C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Services\bin\Debug\EntityFramework.Extended.xml
+C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Services\bin\Debug\WebActivatorEx.dll
+C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Services\bin\Debug\Elmah.SqlServer.EFInitializer.dll
+C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Services\bin\Debug\Microsoft.Web.Infrastructure.dll

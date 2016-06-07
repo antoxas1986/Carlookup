@@ -1,7 +1,10 @@
-﻿using AutoMapper.QueryableExtensions;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using CarLookUp.Core.Models;
 using CarLookUp.Data.Context.Interfaces;
+using CarLookUp.Data.Entities;
 using CarLookUp.Data.Repository.Interfaces;
+using EntityFramework.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,16 +19,21 @@ namespace CarLookUp.Data.Repository
             _db = db;
         }
 
-        public void AddCar(CarDTO car)
+        public Car AddCar(CarDTOWithBodyType car)
         {
-            //_db.Cars.Add(car);
-            _db.SaveChanges();
+            Car carEn = Mapper.Map<Car>(car);
+            return _db.Cars.Add(carEn);
         }
 
-        public void DeleteCar(CarDTO car)
+        public void DeleteCar(int id)
         {
-            //_db.Cars.Remove(car);
-            _db.SaveChanges();
+            _db.Cars.Where(c => c.Id == id).Delete();
+        }
+
+        public void Edit(CarDTOWithBodyType carDto)
+        {
+            Car car = _db.Cars.Find(carDto.Id);
+            car = Mapper.Map(carDto, car);
         }
 
         public ICollection<T> GetAll<T>()
@@ -33,10 +41,9 @@ namespace CarLookUp.Data.Repository
             return _db.Cars.ProjectTo<T>().ToList();
         }
 
-        public CarDTOWithBodyTypeName GetCar(int id)
+        public T GetCar<T>(int id)
         {
-            var car = _db.Cars.Where(c => c.Id == id).ProjectTo<CarDTOWithBodyTypeName>().FirstOrDefault();
-            return car;
+            return _db.Cars.Where(c => c.Id == id).ProjectTo<T>().FirstOrDefault();
         }
     }
 }

@@ -10,9 +10,10 @@ namespace CarLookUp.Data.Mappers
         public void CreateMappings(IConfiguration configuration)
         {
             Mapper.CreateMap<Car, CarDTO>();
-            Mapper.CreateMap<Car, CarDTOWithBodyTypeName>()
+            Mapper.CreateMap<Car, CarDTOWithBodyType>()
                 .ForMember(dest => dest.BodyType, opts => opts.MapFrom(src => src.BodyType.TypeOfBody));
-            Mapper.CreateMap<CarDTO, Car>();
+            Mapper.CreateMap<CarDTOWithBodyType, Car>()
+                .ForMember(dest => dest.BodyType, opts => opts.Ignore());
         }
     }
 }

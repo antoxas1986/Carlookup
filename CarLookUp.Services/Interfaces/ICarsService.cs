@@ -9,13 +9,15 @@ namespace CarLookUp.Services.Interfaces
         /// Adds the car.
         /// </summary>
         /// <param name="car">The car.</param>
-        void AddCar(CarDTO car);
+        void AddCar(CarDTOWithBodyType car);
 
         /// <summary>
         /// Deletes the car.
         /// </summary>
         /// <param name="car">The car.</param>
         void DeleteCar(int id);
+
+        void Edit(CarDTOWithBodyType carDto);
 
         /// <summary>
         /// Gets all cars.
@@ -30,6 +32,6 @@ namespace CarLookUp.Services.Interfaces
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        CarDTOWithBodyTypeName GetCar(int id);
+        CarDTOWithBodyType GetCar(int id);
     }
 }

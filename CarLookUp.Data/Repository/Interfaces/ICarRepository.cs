@@ -1,4 +1,5 @@
 ﻿using CarLookUp.Core.Models;
+using CarLookUp.Data.Entities;
 using System.Collections.Generic;
 
 namespace CarLookUp.Data.Repository.Interfaces
@@ -9,13 +10,15 @@ namespace CarLookUp.Data.Repository.Interfaces
         /// Adds the car.
         /// </summary>
         /// <param name="car">The car.</param>
-        void AddCar(CarDTO car);
+        Car AddCar(CarDTOWithBodyType car);
 
         /// <summary>
         /// Deletes the car.
         /// </summary>
         /// <param name="car">The car.</param>
-        void DeleteCar(CarDTO car);
+        void DeleteCar(int id);
+
+        void Edit(CarDTOWithBodyType carDto);
 
         /// <summary>
         /// Gets all cars.
@@ -28,6 +31,6 @@ namespace CarLookUp.Data.Repository.Interfaces
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        CarDTOWithBodyTypeName GetCar(int id);
+        T GetCar<T>(int id);
     }
 }

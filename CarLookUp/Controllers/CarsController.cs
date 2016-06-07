@@ -24,22 +24,19 @@ namespace CarLookUp.Controllers
         // GET: CarsView/Create
         public ActionResult Create()
         {
-            var model = _carsService.GetAllBodyTypes<BodyTypeDTO>();
-            ViewBag.BodyTypes = model;
+            ViewBag.BodyTypes = new SelectList(_carsService.GetAllBodyTypes<BodyTypeDTO>(), "Id", "TypeOfBody");
             return View();
         }
 
         // POST: CarsView/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([System.Web.Http.FromBody] CarVM car)
+        public ActionResult Create([System.Web.Http.FromBody] CarVMWithBodyTypeName car)
         {
             if (ModelState.IsValid)
             {
-                var newCar = new CarDTO();
-                newCar.Maker = car.Maker;
-                newCar.Model = car.Model;
-                newCar.Year = car.Year;
+                CarDTOWithBodyType newCar = Mapper.Map<CarDTOWithBodyType>(car);
+
                 _carsService.AddCar(newCar);
 
                 DetailsEmailVM email = new DetailsEmailVM(EmailSettings.DETAILS_EMAIL)
@@ -68,14 +65,15 @@ namespace CarLookUp.Controllers
         public ActionResult Delete(int id)
         {
             var model = _carsService.GetCar(id);
-            return View(model);
+            CarVM carVm = Mapper.Map<CarVM>(model);
+            return View(carVm);
         }
 
         // POST: CarsView/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, [System.Web.Http.FromBody] CarVM car)
         {
-            CarDTOWithBodyTypeName carDto = _carsService.GetCar(id);
+            CarDTOWithBodyType carDto = _carsService.GetCar(id);
             if (carDto != null)
             {
                 _carsService.DeleteCar(id);
@@ -89,7 +87,7 @@ namespace CarLookUp.Controllers
         // GET: CarsView/Details/5
         public ActionResult Details(int id)
         {
-            CarDTOWithBodyTypeName carDto = _carsService.GetCar(id);
+            CarDTOWithBodyType carDto = _carsService.GetCar(id);
 
             CarVMWithBodyTypeName carVm = Mapper.Map<CarVMWithBodyTypeName>(carDto);
 
@@ -99,24 +97,25 @@ namespace CarLookUp.Controllers
         // GET: CarsView/Edit/5
         public ActionResult Edit(int id)
         {
-            CarDTOWithBodyTypeName carDto = _carsService.GetCar(id);
+            ViewBag.BodyTypes = new SelectList(_carsService.GetAllBodyTypes<BodyTypeDTO>(), "Id", "TypeOfBody");
 
-            CarVM carVm = Mapper.Map<CarVM>(carDto);
+            CarDTOWithBodyType carDto = _carsService.GetCar(id);
+
+            CarVMWithBodyTypeName carVm = Mapper.Map<CarVMWithBodyTypeName>(carDto);
             return View(carVm);
         }
 
         // POST: CarsView/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, [System.Web.Http.FromBody]CarVM car)
+        public ActionResult Edit(int id, [System.Web.Http.FromBody]CarVMWithBodyTypeName car)
         {
-            CarDTOWithBodyTypeName carDto = _carsService.GetCar(id);
+            CarDTOWithBodyType carDto = _carsService.GetCar(id);
 
             if (ModelState.IsValid && carDto != null)
             {
-                CarDTO dto = Mapper.Map<CarDTO>(car);
-                //carDto.Maker = car.Maker;
-                //carDto.Model = car.Model;
-                //carDto.Year = car.Year;
+                carDto = Mapper.Map<CarDTOWithBodyType>(car);
+                _carsService.Edit(carDto);
+
                 return RedirectToAction("Index");
             }
             return View(car);

@@ -11,7 +11,8 @@ namespace CarLookUp.Web.Mappers
         {
             Mapper.CreateMap<CarDTO, CarVM>();
             Mapper.CreateMap<CarVM, CarDTO>();
-            Mapper.CreateMap<CarDTOWithBodyTypeName, CarVMWithBodyTypeName>();
+            Mapper.CreateMap<CarDTOWithBodyType, CarVMWithBodyTypeName>();
+            Mapper.CreateMap<CarVMWithBodyTypeName, CarDTOWithBodyType>();
         }
     }
 }

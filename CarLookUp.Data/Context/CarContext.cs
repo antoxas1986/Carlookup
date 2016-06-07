@@ -14,6 +14,7 @@ namespace CarLookUp.Data.Context
         public DbSet<BodyType> BodyTypes { get; set; }
 
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

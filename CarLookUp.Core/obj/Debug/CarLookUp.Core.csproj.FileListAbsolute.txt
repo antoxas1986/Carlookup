@@ -6,3 +6,4 @@ C:\Users\akuznetsov\documents\visual studio 2015\Projects\CarLookUp\CarLookUp.Co
 C:\Users\akuznetsov\documents\visual studio 2015\Projects\CarLookUp\CarLookUp.Core\bin\Debug\Autofac.xml
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Core\bin\Debug\AutoMapper.dll
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Core\bin\Debug\AutoMapper.xml
+C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp.Core\obj\Debug\CarLookUp.Core.csprojResolveAssemblyReference.cache

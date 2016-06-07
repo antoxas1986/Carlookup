@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using CarLookUp.Web.Filters;
+using System.Web;
 using System.Web.Mvc;
 
 namespace CarLookUp
@@ -7,7 +8,7 @@ namespace CarLookUp
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new ErrorHandler());
         }
     }
 }

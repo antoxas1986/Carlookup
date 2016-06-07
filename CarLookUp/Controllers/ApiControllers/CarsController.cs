@@ -1,5 +1,6 @@
 ﻿using CarLookUp.Core.Models;
 using CarLookUp.Services.Interfaces;
+using CarLookUp.Web.Filters;
 using CarLookUp.Web.ViewModels;
 using System.Collections.Generic;
 using System.Net;
@@ -12,6 +13,7 @@ namespace CarLookUp.Web.Controllers.ApiContollers
     ///Controller for cars
     /// </summary>
     /// <seealso cref="System.Web.Http.ApiController" />
+    [ApiAuthorization]
     public class CarsController : ApiController
     {
         private static ICarsService _carsService;
@@ -65,7 +67,7 @@ namespace CarLookUp.Web.Controllers.ApiContollers
         {
             if (ModelState.IsValid)
             {
-                var newCar = new CarDTO();
+                var newCar = new CarDTOWithBodyType();
                 newCar.Maker = car.Maker;
                 newCar.Model = car.Model;
                 newCar.Year = car.Year;

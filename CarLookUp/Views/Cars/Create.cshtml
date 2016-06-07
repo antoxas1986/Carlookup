@@ -1,4 +1,4 @@
-﻿@model CarLookUp.Web.ViewModels.CarVM
+﻿@model CarLookUp.Web.ViewModels.CarVMWithBodyTypeName
 
 @{
     ViewBag.Title = "Create";
@@ -37,10 +37,14 @@
                 @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
             </div>
         </div>
-        @foreach (var item in ViewBag.BodyTypes)
-        {
-            <div>@item.TypeOfBody</div>
-        }
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BodyType, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.BodyTypeId, (IEnumerable<SelectListItem>)ViewBag.BodyTypes, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BodyType, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

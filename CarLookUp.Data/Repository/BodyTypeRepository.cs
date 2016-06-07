@@ -1,4 +1,5 @@
 ﻿using AutoMapper.QueryableExtensions;
+using CarLookUp.Core.Models;
 using CarLookUp.Data.Context.Interfaces;
 using CarLookUp.Data.Entities;
 using CarLookUp.Data.Repository.Interfaces;
@@ -20,6 +21,11 @@ namespace CarLookUp.Data.Repository
         public ICollection<T> GetAll<T>()
         {
             return _db.BodyTypes.ProjectTo<T>().ToList();
+        }
+
+        public BodyTypeDTO GetById(int id)
+        {
+            return _db.BodyTypes.Where(b => b.Id == id).ProjectTo<BodyTypeDTO>().FirstOrDefault();
         }
     }
 }

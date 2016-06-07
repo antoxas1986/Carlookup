@@ -8,6 +8,7 @@ namespace CarLookUp.Data.Context.Interfaces
     {
         DbSet<BodyType> BodyTypes { get; set; }
         DbSet<Car> Cars { get; set; }
+        DbSet<Role> Roles { get; set; }
 
         int SaveChanges();
     }

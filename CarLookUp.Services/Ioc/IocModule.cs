@@ -11,6 +11,8 @@ namespace CarLookUp.Services.Ioc
             base.Load(builder);
             builder.RegisterModule(new Data.Ioc.IocModule());
             builder.RegisterType<CarsService>().As<ICarsService>();
+            builder.RegisterType<RoleService>().As<IRoleService>();
+            builder.RegisterType<LoginService>().As<ILoginService>();
         }
     }
 }

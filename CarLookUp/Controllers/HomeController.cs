@@ -1,4 +1,8 @@
-﻿using System;
+﻿using AutoMapper;
+using CarLookUp.Core.ApplicationSettings;
+using CarLookUp.Core.Utilities;
+using CarLookUp.Web.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +14,9 @@ namespace CarLookUp.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = TestApplicationSettings.Test;
+
+            ViewBag.User = Mapper.Map<UserVM>(SessionManager.User);
 
             return View();
         }

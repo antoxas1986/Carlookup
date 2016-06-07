@@ -13,8 +13,10 @@ namespace CarLookUp.Data.Ioc
             base.Load(builder);
             builder.RegisterModule(new Core.Ioc.IocModule());
             builder.RegisterType<CarRepository>().As<ICarRepository>();
-            builder.RegisterType<CarContext>().As<ICarContext>();
+            builder.RegisterType<CarContext>().As<ICarContext>().InstancePerRequest();
             builder.RegisterType<BodyTypeRepository>().As<IBodyTypeRepository>();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
+            builder.RegisterType<RoleRepo>().As<IRoleRepo>();
         }
     }
 }

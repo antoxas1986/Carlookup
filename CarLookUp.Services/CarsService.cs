@@ -1,9 +1,8 @@
-﻿using AutoMapper;
+﻿using CarLookUp.Core.Constants;
 using CarLookUp.Core.Models;
-using CarLookUp.Data.Entities;
+using CarLookUp.Core.Utilities;
 using CarLookUp.Data.Repository.Interfaces;
 using CarLookUp.Services.Interfaces;
-using System;
 using System.Collections.Generic;
 
 namespace CarLookUp.Services.CarServices
@@ -16,20 +15,26 @@ namespace CarLookUp.Services.CarServices
     {
         private IBodyTypeRepository _bodyTypeRepo;
         private ICarRepository _carsRepo;
+        private IUnitOfWork _unit;
 
-        public CarsService(ICarRepository carsRepo, IBodyTypeRepository bodyTypeRepo)
+        public CarsService(ICarRepository carsRepo, IBodyTypeRepository bodyTypeRepo, IUnitOfWork unit)
         {
             _carsRepo = carsRepo;
             _bodyTypeRepo = bodyTypeRepo;
+            _unit = unit;
         }
 
         /// <summary>
         /// Adds the car.
         /// </summary>
         /// <param name="car">The car.</param>
-        public void AddCar(CarDTO car)
+        public void AddCar(CarDTOWithBodyType car)
         {
-            //_carsRepo.AddCar(car);
+            var output = _carsRepo.AddCar(car);
+            if (output != null)
+            {
+                _unit.SaveChanges();
+            }
         }
 
         /// <summary>
@@ -38,8 +43,22 @@ namespace CarLookUp.Services.CarServices
         /// <param name="id">The identifier.</param>
         public void DeleteCar(int id)
         {
-            //CarDTO car = _carsRepo.GetCar(id);
-            //_carsRepo.DeleteCar(car);
+            CarDTO car = _carsRepo.GetCar<CarDTO>(id);
+            if (car != null)
+            {
+                _carsRepo.DeleteCar(id);
+                _unit.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Edits the specified car dto.
+        /// </summary>
+        /// <param name="carDto">The car dto.</param>
+        public void Edit(CarDTOWithBodyType carDto)
+        {
+            _carsRepo.Edit(carDto);
+            _unit.SaveChanges();
         }
 
         /// <summary>
@@ -51,9 +70,26 @@ namespace CarLookUp.Services.CarServices
             return _carsRepo.GetAll<T>();
         }
 
-        public ICollection<T> GetAllBodyTypes<T>()
+        public ICollection<BodyTypeDTO> GetAllBodyTypes<BodyTypeDTO>()
         {
-            return _bodyTypeRepo.GetAll<T>();
+            ICollection<BodyTypeDTO> list = (ICollection<BodyTypeDTO>)GlobalCachingProvider.Instance.GetItem(CacheKeys.BODYTYPES);
+            if (list == null)
+            {
+                list = _bodyTypeRepo.GetAll<BodyTypeDTO>();
+                GlobalCachingProvider.Instance.AddItem(CacheKeys.BODYTYPES, list);
+            }
+            return list;
+        }
+
+        public BodyTypeDTO GetBodyTypeById(int id)
+        {
+            BodyTypeDTO bodyType = (BodyTypeDTO)GlobalCachingProvider.Instance.GetItem(CacheKeys.BODYTYPES + id);
+            if (bodyType == null)
+            {
+                bodyType = _bodyTypeRepo.GetById(id);
+                GlobalCachingProvider.Instance.AddItem(CacheKeys.BODYTYPES + id, bodyType);
+            }
+            return bodyType;
         }
 
         /// <summary>
@@ -61,9 +97,9 @@ namespace CarLookUp.Services.CarServices
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        public CarDTOWithBodyTypeName GetCar(int id)
+        public CarDTOWithBodyType GetCar(int id)
         {
-            return _carsRepo.GetCar(id);
+            return _carsRepo.GetCar<CarDTOWithBodyType>(id);
         }
     }
 }

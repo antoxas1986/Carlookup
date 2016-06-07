@@ -49,12 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ILoginService.cs" />
+    <Compile Include="Interfaces\IRoleService.cs" />
     <Compile Include="Ioc\IocModule.cs" />
+    <Compile Include="LoginService.cs" />
     <Compile Include="Mappers\AutoMapperConfig.cs" />
     <Compile Include="Mappers\CarMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CarsService.cs" />
     <Compile Include="Interfaces\ICarsService.cs" />
+    <Compile Include="RoleService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CarLookUp.Core\CarLookUp.Core.csproj">

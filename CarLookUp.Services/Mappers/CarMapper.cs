@@ -10,7 +10,7 @@ namespace CarLookUp.Services.Mappers
         public void CreateMappings(IConfiguration configuration)
         {
             Mapper.CreateMap<Car, CarDTO>();
-            Mapper.CreateMap<Car, CarDTOWithBodyTypeName>();
+            Mapper.CreateMap<Car, CarDTOWithBodyType>();
         }
     }
 }
