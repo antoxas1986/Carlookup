@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using CarLookUp.Core.Constants;
+using CarLookUp.Core.Enum;
 using CarLookUp.Core.Models;
 using CarLookUp.Services.Interfaces;
 using CarLookUp.Web.ViewModels;
 using Postal;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace CarLookUp.Controllers
@@ -64,7 +66,18 @@ namespace CarLookUp.Controllers
         // GET: CarsView/Delete/5
         public ActionResult Delete(int id)
         {
-            var model = _carsService.GetCar(id);
+            ValidationMassageList messages = new ValidationMassageList();
+            var model = _carsService.GetCar(id, messages);
+
+            if (messages.HasError)
+            {
+                var error = messages.Where(m => m.Type == MessageTypes.Error).Select(m => m.Text).FirstOrDefault();
+
+                ModelState.AddModelError(string.Empty, error);
+
+                return View();
+            }
+
             CarVM carVm = Mapper.Map<CarVM>(model);
             return View(carVm);
         }
@@ -73,21 +86,37 @@ namespace CarLookUp.Controllers
         [HttpPost]
         public ActionResult Delete(int id, [System.Web.Http.FromBody] CarVM car)
         {
-            CarDTOWithBodyType carDto = _carsService.GetCar(id);
-            if (carDto != null)
-            {
-                _carsService.DeleteCar(id);
+            ValidationMassageList messages = new ValidationMassageList();
 
-                return RedirectToAction("Index");
+            CarDTOWithBodyType carDto = _carsService.GetCar(id, messages);
+
+            if (messages.HasError)
+            {
+                var error = messages.Where(m => m.Type == MessageTypes.Error).Select(m => m.Text).FirstOrDefault();
+
+                ModelState.AddModelError(string.Empty, error);
+
+                return View(car);
             }
 
-            return View(car);
+            _carsService.DeleteCar(id);
+
+            return RedirectToAction("Index");
         }
 
         // GET: CarsView/Details/5
         public ActionResult Details(int id)
         {
-            CarDTOWithBodyType carDto = _carsService.GetCar(id);
+            ValidationMassageList messages = new ValidationMassageList();
+
+            CarDTOWithBodyType carDto = _carsService.GetCar(id, messages);
+
+            if (messages.HasError)
+            {
+                var error = messages.Where(m => m.Type == MessageTypes.Error).Select(m => m.Text).FirstOrDefault();
+                ModelState.AddModelError(string.Empty, error);
+                return View("Index");
+            }
 
             CarVMWithBodyTypeName carVm = Mapper.Map<CarVMWithBodyTypeName>(carDto);
 
@@ -99,7 +128,15 @@ namespace CarLookUp.Controllers
         {
             ViewBag.BodyTypes = new SelectList(_carsService.GetAllBodyTypes<BodyTypeDTO>(), "Id", "TypeOfBody");
 
-            CarDTOWithBodyType carDto = _carsService.GetCar(id);
+            ValidationMassageList messages = new ValidationMassageList();
+            CarDTOWithBodyType carDto = _carsService.GetCar(id, messages);
+
+            if (messages.HasError)
+            {
+                var error = messages.Where(m => m.Type == MessageTypes.Error).Select(m => m.Text).FirstOrDefault();
+                ModelState.AddModelError(string.Empty, error);
+                return View("Index");
+            }
 
             CarVMWithBodyTypeName carVm = Mapper.Map<CarVMWithBodyTypeName>(carDto);
             return View(carVm);
@@ -109,9 +146,18 @@ namespace CarLookUp.Controllers
         [HttpPost]
         public ActionResult Edit(int id, [System.Web.Http.FromBody]CarVMWithBodyTypeName car)
         {
-            CarDTOWithBodyType carDto = _carsService.GetCar(id);
+            ValidationMassageList messages = new ValidationMassageList();
 
-            if (ModelState.IsValid && carDto != null)
+            CarDTOWithBodyType carDto = _carsService.GetCar(id, messages);
+
+            if (messages.HasError)
+            {
+                var error = messages.Where(m => m.Type == MessageTypes.Error).Select(m => m.Text).FirstOrDefault();
+                ModelState.AddModelError(string.Empty, error);
+                return View(car);
+            }
+
+            if (ModelState.IsValid)
             {
                 carDto = Mapper.Map<CarDTOWithBodyType>(car);
                 _carsService.Edit(carDto);

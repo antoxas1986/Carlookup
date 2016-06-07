@@ -50,7 +50,8 @@ namespace CarLookUp.Web.Controllers.ApiContollers
         /// <returns></returns>
         public HttpResponseMessage Get(int id)
         {
-            CarDTO car = _carsService.GetCar(id);
+            ValidationMassageList messages = new ValidationMassageList();
+            CarDTO car = _carsService.GetCar(id, messages);
             if (car != null)
             {
                 return Request.CreateResponse(car);
@@ -84,7 +85,8 @@ namespace CarLookUp.Web.Controllers.ApiContollers
         /// <returns></returns>
         public HttpResponseMessage Put(int id, CarVM car)
         {
-            var newCar = _carsService.GetCar(id);
+            ValidationMassageList messages = new ValidationMassageList();
+            var newCar = _carsService.GetCar(id, messages);
             if (newCar != null && ModelState.IsValid)
             {
                 newCar.Maker = car.Maker;

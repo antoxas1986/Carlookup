@@ -14,12 +14,19 @@ namespace CarLookUp.Data.Repository
             _db = db;
         }
 
+        /// <summary>
+        /// Releases unmanaged and - optionally - managed resources.
+        /// </summary>
         public void Dispose()
         {
             Dispose();
             GC.SuppressFinalize(this);
         }
 
+        /// <summary>
+        /// Saves the changes in Entity Framework.
+        /// </summary>
+        /// <returns></returns>
         public int SaveChanges()
         {
             return _db.SaveChanges();

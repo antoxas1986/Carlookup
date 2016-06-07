@@ -207,7 +207,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Filters\ApiAuthorization.cs" />
     <Compile Include="Filters\ErrorHandler.cs" />
     <Compile Include="Filters\MvcAuthorization.cs" />

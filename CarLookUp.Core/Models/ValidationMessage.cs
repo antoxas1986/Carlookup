@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace CarLookUp.Core.Models
 {
+    /// <summary>
+    /// Validation message model
+    /// </summary>
     public class ValidationMessage
     {
         public ValidationMessage(MessageTypes type, string messsageText)

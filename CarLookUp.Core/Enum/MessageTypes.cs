@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CarLookUp.Core.Enum
 {
+    /// <summary>
+    /// Enum for types of messages
+    /// </summary>
     public enum MessageTypes
     {
         Succes = 1,

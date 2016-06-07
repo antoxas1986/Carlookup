@@ -1,5 +1,8 @@
 ﻿namespace CarLookUp.Core.Models
 {
+    /// <summary>
+    /// Base carDTO model
+    /// </summary>
     public class CarDTO
     {
         public int Id { get; set; }

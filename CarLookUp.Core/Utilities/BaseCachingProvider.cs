@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace CarLookUp.Core.Utilities
 {
+    /// <summary>
+    /// Base caching provider
+    /// </summary>
     public class BaseCachingProvider
     {
         protected MemoryCache cache = new MemoryCache("CachingProvider");
@@ -16,6 +19,12 @@ namespace CarLookUp.Core.Utilities
         {
         }
 
+        /// <summary>
+        /// Adds the item to server side chaching
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="expiration">The expiration.</param>
         protected virtual void AddItem(string key, object value, DateTimeOffset? expiration = null)
         {
             lock (_padlock)
@@ -33,6 +42,11 @@ namespace CarLookUp.Core.Utilities
             }
         }
 
+        /// <summary>
+        /// Gets the item from cache by key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
         protected virtual object GetItem(string key)
         {
             lock (_padlock)
@@ -41,6 +55,10 @@ namespace CarLookUp.Core.Utilities
             }
         }
 
+        /// <summary>
+        /// Removes the item from cache by key.
+        /// </summary>
+        /// <param name="key">The key.</param>
         protected virtual void RemoveItem(string key)
         {
             lock (_padlock)

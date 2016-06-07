@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace CarLookUp.Core.Models
 {
+    /// <summary>
+    /// Base RoleDTO model
+    /// </summary>
     public class RoleDTO
     {
         public int Id { get; set; }

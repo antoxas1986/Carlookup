@@ -7,6 +7,10 @@ using System.Collections.Generic;
 
 namespace CarLookUp.Services
 {
+    /// <summary>
+    ///
+    /// </summary>
+    /// <seealso cref="CarLookUp.Services.Interfaces.IRoleService" />
     public class RoleService : IRoleService
     {
         private IRoleRepo _roleRepo;
@@ -16,6 +20,12 @@ namespace CarLookUp.Services
             _roleRepo = roleRepo;
         }
 
+        /// <summary>
+        /// Gets all roles.
+        /// </summary>
+        /// <returns>
+        /// ICollection
+        /// </returns>
         public ICollection<RoleDTO> GetAll()
         {
             ICollection<RoleDTO> list = (ICollection<RoleDTO>)GlobalCachingProvider.Instance.GetItem(CacheKeys.ROLES);
@@ -27,6 +37,13 @@ namespace CarLookUp.Services
             return list;
         }
 
+        /// <summary>
+        /// Gets the role by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        /// RoleDTO
+        /// </returns>
         public RoleDTO GetById(int id)
         {
             RoleDTO role = (RoleDTO)GlobalCachingProvider.Instance.GetItem(CacheKeys.ROLES + id);

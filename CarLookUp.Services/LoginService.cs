@@ -15,6 +15,11 @@ namespace CarLookUp.Services
             _roleService = roleService;
         }
 
+        /// <summary>
+        /// Logins the user into session.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="messages">The validation messages.</param>
         public void LoginUser(UserDTO user, ValidationMassageList messages)
         {
             RoleDTO role = _roleService.GetById(user.Role.Id);
@@ -29,6 +34,9 @@ namespace CarLookUp.Services
             SessionManager.User = user;
         }
 
+        /// <summary>
+        /// Logoffs user form session.
+        /// </summary>
         public void Logoff()
         {
             if (SessionManager.User != null)

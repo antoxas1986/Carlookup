@@ -2,6 +2,9 @@
 
 namespace CarLookUp.Core.Models
 {
+    /// <summary>
+    /// Base BodyType model
+    /// </summary>
     public class BodyTypeDTO
     {
         public virtual ICollection<CarDTO> Cars { get; set; }

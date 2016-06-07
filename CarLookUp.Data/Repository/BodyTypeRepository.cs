@@ -9,6 +9,10 @@ using System.Linq;
 
 namespace CarLookUp.Data.Repository
 {
+    /// <summary>
+    /// Implementation bodytype interface
+    /// </summary>
+    /// <seealso cref="CarLookUp.Data.Repository.Interfaces.IBodyTypeRepository" />
     public class BodyTypeRepository : IBodyTypeRepository
     {
         private ICarContext _db;
@@ -18,11 +22,21 @@ namespace CarLookUp.Data.Repository
             _db = db;
         }
 
+        /// <summary>
+        /// Gets all bodytypes model.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public ICollection<T> GetAll<T>()
         {
             return _db.BodyTypes.ProjectTo<T>().ToList();
         }
 
+        /// <summary>
+        /// Gets the bodytype by identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         public BodyTypeDTO GetById(int id)
         {
             return _db.BodyTypes.Where(b => b.Id == id).ProjectTo<BodyTypeDTO>().FirstOrDefault();

@@ -4,18 +4,22 @@ using System.Collections.Generic;
 
 namespace CarLookUp.Data.Repository.Interfaces
 {
+    /// <summary>
+    /// Api to work with car model
+    /// </summary>
     public interface ICarRepository
     {
         /// <summary>
         /// Adds the car.
         /// </summary>
         /// <param name="car">The car.</param>
+        /// <returns></returns>
         Car AddCar(CarDTOWithBodyType car);
 
         /// <summary>
-        /// Deletes the car.
+        /// Deletes the car by identifier.
         /// </summary>
-        /// <param name="car">The car.</param>
+        /// <param name="id">The identifier.</param>
         void DeleteCar(int id);
 
         void Edit(CarDTOWithBodyType carDto);
@@ -27,7 +31,7 @@ namespace CarLookUp.Data.Repository.Interfaces
         ICollection<T> GetAll<T>();
 
         /// <summary>
-        /// Gets the car by id.
+        /// Gets the car by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>

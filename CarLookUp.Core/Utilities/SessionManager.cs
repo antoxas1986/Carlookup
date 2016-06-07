@@ -4,6 +4,9 @@ using System.Web.SessionState;
 
 namespace CarLookUp.Core.Utilities
 {
+    /// <summary>
+    /// Session manager class
+    /// </summary>
     public class SessionManager
     {
         public static UserDTO User

@@ -8,8 +8,17 @@ using System.Threading.Tasks;
 
 namespace CarLookUp.Core.ApplicationSettings
 {
+    /// <summary>
+    /// Base Application Settings
+    /// </summary>
     public class BaseApplicationSettings
     {
+        /// <summary>
+        /// Gets the specified key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationSettingsException"></exception>
         protected static string Get(string key)
         {
             var settings = ConfigurationManager.AppSettings[key];
