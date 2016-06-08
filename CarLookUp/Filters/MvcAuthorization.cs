@@ -9,6 +9,10 @@ using System.Web.Mvc;
 
 namespace CarLookUp.Web.Filters
 {
+    /// <summary>
+    /// Custom filter for authorize mvc controllers
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.AuthorizeAttribute" />
     public class MvcAuthorization : AuthorizeAttribute
     {
         private UserDTO User { get { return SessionManager.User; } }
@@ -23,7 +27,7 @@ namespace CarLookUp.Web.Filters
                 {
                     if (!CheckRoles(User))
                     {
-                        context.Result = new RedirectResult("/Home/Index");
+                        context.Result = new RedirectResult("/Error/Forbidden");
                     }
                 }
             }

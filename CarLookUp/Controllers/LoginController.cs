@@ -11,6 +11,10 @@ using System.Web.Mvc;
 
 namespace CarLookUp.Controllers
 {
+    /// <summary>
+    /// Login controller
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
     public class LoginController : Controller
     {
         private ILoginService _loginService;
@@ -31,6 +35,11 @@ namespace CarLookUp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Logins the user into session.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Login([System.Web.Http.FromBody]UserVM model)
@@ -56,12 +65,19 @@ namespace CarLookUp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Logoffs user from session.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Logoff()
         {
             _loginService.Logoff();
-            return RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Gets the roles. Test method
+        /// </summary>
         private void GetRoles()
         {
             ICollection<RoleDTO> dtos = _roleService.GetAll();

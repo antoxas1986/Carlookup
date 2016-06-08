@@ -1,5 +1,6 @@
 ﻿using CarLookUp.Core.Models;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace CarLookUp.Services.Interfaces
 {
@@ -24,7 +25,7 @@ namespace CarLookUp.Services.Interfaces
         /// Edits the specified car dto.
         /// </summary>
         /// <param name="carDto">The car dto.</param>
-        void Edit(CarDTOWithBodyType carDto);
+        void Edit(CarDTOWithBodyType carDto, ValidationMassageList messages);
 
         /// <summary>
         /// Gets all cars.

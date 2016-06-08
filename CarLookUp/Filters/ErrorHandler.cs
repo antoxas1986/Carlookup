@@ -5,6 +5,11 @@ using System.Web.Mvc;
 
 namespace CarLookUp.Web.Filters
 {
+    /// <summary>
+    /// Custom error handler
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.IResultFilter" />
+    /// <seealso cref="System.Web.Mvc.IExceptionFilter" />
     public class ErrorHandler : IResultFilter, IExceptionFilter
     {
         public void OnException(ExceptionContext filterContext)
@@ -29,6 +34,10 @@ namespace CarLookUp.Web.Filters
             else if (httpStatusCodeResult.StatusCode == (int)HttpStatusCode.InternalServerError)
             {
                 ExecuteCustomViewResult(filterContext.Controller.ControllerContext, "~/Views/Error/ServerError.cshtml");
+            }
+            else if (httpStatusCodeResult.StatusCode == (int)HttpStatusCode.Forbidden)
+            {
+                ExecuteCustomViewResult(filterContext.Controller.ControllerContext, "~/Views/Error/Forbidden.cshtml");
             }
         }
 

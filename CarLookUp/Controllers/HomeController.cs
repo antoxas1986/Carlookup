@@ -10,8 +10,16 @@ using System.Web.Mvc;
 
 namespace CarLookUp.Controllers
 {
+    /// <summary>
+    /// Just home controller
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Indexes this instance.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             ViewBag.Title = TestApplicationSettings.Test;

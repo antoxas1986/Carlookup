@@ -10,6 +10,10 @@ using System.Web.Mvc;
 
 namespace CarLookUp.Controllers
 {
+    /// <summary>
+    /// Controller to work with roles
+    /// </summary>
+    /// <seealso cref="System.Web.Mvc.Controller" />
     [MvcAuthorization]
     public class RoleController : Controller
     {
@@ -20,6 +24,11 @@ namespace CarLookUp.Controllers
             _roleService = roleService;
         }
 
+        /// <summary>
+        /// Details for role by specified identifier.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
         [MvcAuthorization(Roles = Roles.ADMIN)]
         public ActionResult Details(int id)
         {
@@ -34,6 +43,10 @@ namespace CarLookUp.Controllers
         }
 
         // GET: Role
+        /// <summary>
+        /// Index
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             ICollection<RoleDTO> dtos = _roleService.GetAll();

@@ -9,6 +9,10 @@ using System.Web.Http.Controllers;
 
 namespace CarLookUp.Web.Filters
 {
+    /// <summary>
+    /// Custom filter for authorize api controllers
+    /// </summary>
+    /// <seealso cref="System.Web.Http.AuthorizeAttribute" />
     public class ApiAuthorization : AuthorizeAttribute
     {
         private IRoleService RoleService { get { return Ioc.AutofacConfig.Resolve<IRoleService>(); } }
@@ -18,7 +22,7 @@ namespace CarLookUp.Web.Filters
         {
             var isAuthenticated = AuthorizeCore();
 
-            if (!isAuthenticated)
+            if (isAuthenticated)
             {
                 if (!string.IsNullOrEmpty(Roles))
                 {

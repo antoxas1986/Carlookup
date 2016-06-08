@@ -56,8 +56,15 @@ namespace CarLookUp.Services.CarServices
         /// Edits the specified car dto.
         /// </summary>
         /// <param name="carDto">The car dto.</param>
-        public void Edit(CarDTOWithBodyType carDto)
+        public void Edit(CarDTOWithBodyType carDto, ValidationMassageList messages)
         {
+            BodyTypeDTO bodyTypeDto = _bodyTypeRepo.GetById(carDto.BodyTypeId);
+            if (bodyTypeDto == null)
+            {
+                messages.Add(new ValidationMessage(MessageTypes.Error, ErrorMessages.NO_BODYTYPE));
+                return;
+            }
+
             _carsRepo.Edit(carDto);
             _unit.SaveChanges();
         }

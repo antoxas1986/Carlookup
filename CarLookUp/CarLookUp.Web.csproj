@@ -310,6 +310,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CarLookUp.Core\CarLookUp.Core.csproj">

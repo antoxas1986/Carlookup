@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLookUp.Core", "CarLookUp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLookUp.Services", "CarLookUp.Services\CarLookUp.Services.csproj", "{58399870-4B5A-4A84-BE3F-2368B841B518}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarLookUp.UnitTest", "CarLookUpTest\CarLookUp.UnitTest.csproj", "{DAA789EE-5B8C-4972-9AC0-5F976CEF9347}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{58399870-4B5A-4A84-BE3F-2368B841B518}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58399870-4B5A-4A84-BE3F-2368B841B518}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58399870-4B5A-4A84-BE3F-2368B841B518}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAA789EE-5B8C-4972-9AC0-5F976CEF9347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAA789EE-5B8C-4972-9AC0-5F976CEF9347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAA789EE-5B8C-4972-9AC0-5F976CEF9347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAA789EE-5B8C-4972-9AC0-5F976CEF9347}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
