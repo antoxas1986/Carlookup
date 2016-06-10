@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using CarLookUp.Core.Constants;
+using CarLookUp.Core.Enum;
 using CarLookUp.Core.Models;
 using CarLookUp.Data.Context.Interfaces;
 using CarLookUp.Data.Entities;
@@ -28,10 +30,10 @@ namespace CarLookUp.Data.Repository
         /// </summary>
         /// <param name="car">The car.</param>
         /// <returns></returns>
-        public Car AddCar(CarDTOWithBodyType car)
+        public void AddCar(CarDTOWithBodyType car)
         {
             Car carEn = Mapper.Map<Car>(car);
-            return _db.Cars.Add(carEn);
+            _db.Cars.Add(carEn);
         }
 
         /// <summary>
@@ -47,9 +49,14 @@ namespace CarLookUp.Data.Repository
         /// Edits the specified car dto.
         /// </summary>
         /// <param name="carDto">The car dto.</param>
-        public void Edit(CarDTOWithBodyType carDto)
+        public void Edit(CarDTOWithBodyType carDto, ValidationMessageList messages)
         {
             Car car = _db.Cars.Find(carDto.Id);
+            if (car == null)
+            {
+                messages.Add(new ValidationMessage(MessageTypes.Error, ErrorMessages.NO_CAR));
+                return;
+            }
             car = Mapper.Map(carDto, car);
         }
 

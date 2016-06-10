@@ -25,9 +25,6 @@ C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\bi
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\bin\roslyn\vbc.rsp
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\bin\roslyn\VBCSCompiler.exe
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\bin\CarLookUp.dll.config
-C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\bin\CarLookUp.dll
-C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\bin\CarLookUp.pdb
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\bin\Antlr3.Runtime.dll
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\bin\Autofac.dll
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\bin\Autofac.Integration.Mvc.dll
@@ -87,5 +84,8 @@ C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\bi
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\bin\System.Web.WebPages.Razor.xml
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\bin\CarLookUp.Data.pdb
 C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\bin\EntityFramework.Extended.xml
-C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\obj\Debug\CarLookUp.dll
-C:\Users\akuznetsov\Documents\Visual Studio 2015\Projects\CarLookUp\CarLookUp\obj\Debug\CarLookUp.pdb
+C:\Users\akuznetsov\documents\visual studio 2015\Projects\CarLookUp\CarLookUp\bin\CarLookUp.Web.dll.config
+C:\Users\akuznetsov\documents\visual studio 2015\Projects\CarLookUp\CarLookUp\bin\CarLookUp.Web.dll
+C:\Users\akuznetsov\documents\visual studio 2015\Projects\CarLookUp\CarLookUp\bin\CarLookUp.Web.pdb
+C:\Users\akuznetsov\documents\visual studio 2015\Projects\CarLookUp\CarLookUp\obj\Debug\CarLookUp.Web.dll
+C:\Users\akuznetsov\documents\visual studio 2015\Projects\CarLookUp\CarLookUp\obj\Debug\CarLookUp.Web.pdb

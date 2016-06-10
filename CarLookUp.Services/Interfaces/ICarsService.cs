@@ -13,7 +13,7 @@ namespace CarLookUp.Services.Interfaces
         /// Adds the car.
         /// </summary>
         /// <param name="car">The car.</param>
-        void AddCar(CarDTOWithBodyType car);
+        void AddCar(CarDTOWithBodyType car, ValidationMessageList messages);
 
         /// <summary>
         /// Deletes the car by identifier.
@@ -25,7 +25,7 @@ namespace CarLookUp.Services.Interfaces
         /// Edits the specified car dto.
         /// </summary>
         /// <param name="carDto">The car dto.</param>
-        void Edit(CarDTOWithBodyType carDto, ValidationMassageList messages);
+        void Edit(int id, CarDTOWithBodyType carDto, ValidationMessageList messages);
 
         /// <summary>
         /// Gets all cars.
@@ -38,13 +38,13 @@ namespace CarLookUp.Services.Interfaces
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        ICollection<T> GetAllBodyTypes<T>();
+        ICollection<BodyTypeDTO> GetAllBodyTypes();
 
         /// <summary>
         /// Gets the car by identifier.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns></returns>
-        CarDTOWithBodyType GetCar(int id, ValidationMassageList messages);
+        CarDTOWithBodyType GetCar(int id, ValidationMessageList messages);
     }
 }

@@ -17,7 +17,7 @@ namespace CarLookUp.Services.Interfaces
         /// </summary>
         /// <param name="user">The user.</param>
         /// <param name="messages">The validation messages.</param>
-        void LoginUser(UserDTO user, ValidationMassageList messages);
+        void LoginUser(UserDTO user, ValidationMessageList messages);
 
         /// <summary>
         /// Logoffs user form session.

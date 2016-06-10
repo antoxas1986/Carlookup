@@ -29,11 +29,11 @@ namespace CarLookUp.Services.CarServices
         /// Adds the car.
         /// </summary>
         /// <param name="car">The car.</param>
-        public void AddCar(CarDTOWithBodyType car)
+        public void AddCar(CarDTOWithBodyType car, ValidationMessageList messages)
         {
-            var output = _carsRepo.AddCar(car);
-            if (output != null)
+            if (IsBodyTypeValid(car, messages))
             {
+                _carsRepo.AddCar(car);
                 _unit.SaveChanges();
             }
         }
@@ -56,17 +56,22 @@ namespace CarLookUp.Services.CarServices
         /// Edits the specified car dto.
         /// </summary>
         /// <param name="carDto">The car dto.</param>
-        public void Edit(CarDTOWithBodyType carDto, ValidationMassageList messages)
+        public void Edit(int id, CarDTOWithBodyType carDto, ValidationMessageList messages)
         {
-            BodyTypeDTO bodyTypeDto = _bodyTypeRepo.GetById(carDto.BodyTypeId);
-            if (bodyTypeDto == null)
+            if (id != carDto.Id)
             {
-                messages.Add(new ValidationMessage(MessageTypes.Error, ErrorMessages.NO_BODYTYPE));
+                messages.Add(new ValidationMessage(MessageTypes.Error, ErrorMessages.ID_NOT_MATCH));
                 return;
             }
 
-            _carsRepo.Edit(carDto);
-            _unit.SaveChanges();
+            if (IsBodyTypeValid(carDto, messages))
+            {
+                _carsRepo.Edit(carDto, messages);
+                if (!messages.HasError)
+                {
+                    _unit.SaveChanges();
+                }
+            }
         }
 
         /// <summary>
@@ -83,7 +88,7 @@ namespace CarLookUp.Services.CarServices
         /// </summary>
         /// <typeparam name="BodyTypeDTO">The type of the body type dto.</typeparam>
         /// <returns></returns>
-        public ICollection<BodyTypeDTO> GetAllBodyTypes<BodyTypeDTO>()
+        public ICollection<BodyTypeDTO> GetAllBodyTypes()
         {
             ICollection<BodyTypeDTO> list = (ICollection<BodyTypeDTO>)GlobalCachingProvider.Instance.GetItem(CacheKeys.BODYTYPES);
             if (list == null)
@@ -118,16 +123,27 @@ namespace CarLookUp.Services.CarServices
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <returns>CarDTOWithBodyType</returns>
-        public CarDTOWithBodyType GetCar(int id, ValidationMassageList messages)
+        public CarDTOWithBodyType GetCar(int id, ValidationMessageList messages)
         {
             var car = _carsRepo.GetCar<CarDTOWithBodyType>(id);
 
             if (car == null)
             {
-                messages.Add(new ValidationMessage(MessageTypes.Error, ErrorMessages.NO_CARWITHBODYTYPE));
+                messages.Add(new ValidationMessage(MessageTypes.Error, ErrorMessages.NO_CAR));
             }
 
             return car;
+        }
+
+        private bool IsBodyTypeValid(CarDTOWithBodyType car, ValidationMessageList messages)
+        {
+            BodyTypeDTO bodyTypeDto = _bodyTypeRepo.GetById(car.BodyTypeId);
+            if (bodyTypeDto == null)
+            {
+                messages.Add(new ValidationMessage(MessageTypes.Error, ErrorMessages.NO_BODYTYPE));
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -11,8 +11,9 @@ namespace CarLookUp.Core.Constants
     /// </summary>
     public class ErrorMessages
     {
+        public const string ID_NOT_MATCH = "Ids do not match.";
         public const string NO_BODYTYPE = "The body type you trying access do not exist";
-        public const string NO_CARWITHBODYTYPE = "The car you trying access do not exist.";
+        public const string NO_CAR = "The car you trying access do not exist.";
         public const string NO_ROLE = "The role you trying access do not exist.";
     }
 }

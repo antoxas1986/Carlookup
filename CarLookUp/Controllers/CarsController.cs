@@ -30,18 +30,17 @@ namespace CarLookUp.Controllers
             _emailService = emailService;
         }
 
-        // GET: CarsView/Create
         /// <summary>
         /// Creates new car view.
         /// </summary>
         /// <returns></returns>
+        [MvcAuthorization(Roles = Roles.ADMIN)]
         public ActionResult Create()
         {
-            ViewBag.BodyTypes = new SelectList(_carsService.GetAllBodyTypes<BodyTypeDTO>(), "Id", "TypeOfBody");
+            GetBodyTypes();
             return View();
         }
 
-        // POST: CarsView/Create
         /// <summary>
         /// Creates the specified car and sends email about it.
         /// </summary>
@@ -49,18 +48,20 @@ namespace CarLookUp.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [MvcAuthorization(Roles = Roles.ADMIN)]
         public ActionResult Create([System.Web.Http.FromBody] CarVMWithBodyTypeName car)
         {
             if (ModelState.IsValid)
             {
                 CarDTOWithBodyType newCar = Mapper.Map<CarDTOWithBodyType>(car);
+                ValidationMessageList messages = new ValidationMessageList();
 
-                _carsService.AddCar(newCar);
+                _carsService.AddCar(newCar, messages);
 
                 DetailsEmailVM email = new DetailsEmailVM(EmailSettings.DETAILS_EMAIL)
                 {
-                    Subject = "subject",
-                    ToAddress = "test@c.c",
+                    Subject = "New car created.",
+                    ToAddress = "test@gmail.com",
                     Maker = newCar.Maker,
                     Model = newCar.Model,
                     Year = newCar.Year
@@ -76,10 +77,10 @@ namespace CarLookUp.Controllers
 
                 return RedirectToAction("Index");
             }
-            return View();
+            GetBodyTypes();
+            return View(car);
         }
 
-        // GET: CarsView/Delete/5
         /// <summary>
         /// Delete view for car by specified identifier.
         /// </summary>
@@ -88,12 +89,12 @@ namespace CarLookUp.Controllers
         [MvcAuthorization(Roles = Roles.ADMIN)]
         public ActionResult Delete(int id)
         {
-            ValidationMassageList messages = new ValidationMassageList();
+            ValidationMessageList messages = new ValidationMessageList();
             var model = _carsService.GetCar(id, messages);
 
             if (messages.HasError)
             {
-                var error = messages.Where(m => m.Type == MessageTypes.Error).Select(m => m.Text).FirstOrDefault();
+                var error = messages.GetFirstErrorMsg;
 
                 ModelState.AddModelError(string.Empty, error);
 
@@ -104,7 +105,6 @@ namespace CarLookUp.Controllers
             return View(carVm);
         }
 
-        // POST: CarsView/Delete/5
         /// <summary>
         /// Deletes the car by specified identifier.
         /// </summary>
@@ -115,13 +115,13 @@ namespace CarLookUp.Controllers
         [HttpPost]
         public ActionResult Delete(int id, [System.Web.Http.FromBody] CarVM car)
         {
-            ValidationMassageList messages = new ValidationMassageList();
+            ValidationMessageList messages = new ValidationMessageList();
 
             CarDTOWithBodyType carDto = _carsService.GetCar(id, messages);
 
             if (messages.HasError)
             {
-                var error = messages.Where(m => m.Type == MessageTypes.Error).Select(m => m.Text).FirstOrDefault();
+                var error = messages.GetFirstErrorMsg;
 
                 ModelState.AddModelError(string.Empty, error);
 
@@ -133,7 +133,6 @@ namespace CarLookUp.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET: CarsView/Details/5
         /// <summary>
         /// Details for car by specified identifier.
         /// </summary>
@@ -141,13 +140,13 @@ namespace CarLookUp.Controllers
         /// <returns></returns>
         public ActionResult Details(int id)
         {
-            ValidationMassageList messages = new ValidationMassageList();
+            ValidationMessageList messages = new ValidationMessageList();
 
             CarDTOWithBodyType carDto = _carsService.GetCar(id, messages);
 
             if (messages.HasError)
             {
-                var error = messages.Where(m => m.Type == MessageTypes.Error).Select(m => m.Text).FirstOrDefault();
+                var error = messages.GetFirstErrorMsg;
                 ViewBag.error = error;
                 return HttpNotFound();
             }
@@ -165,18 +164,18 @@ namespace CarLookUp.Controllers
         [MvcAuthorization(Roles = Roles.ADMIN)]
         public ActionResult Edit(int id)
         {
-            ICollection<SelectListItem> list = Mapper.Map<ICollection<SelectListItem>>(_carsService.GetAllBodyTypes<BodyTypeDTO>());
+            ICollection<SelectListItem> list = Mapper.Map<ICollection<SelectListItem>>(_carsService.GetAllBodyTypes());
 
             //adding to call error condition on non-exist bodytype.
             list.Add(new SelectListItem { Value = "999", Text = "Force Error" });
 
             ViewBag.BodyTypes = list;
-            ValidationMassageList messages = new ValidationMassageList();
+            ValidationMessageList messages = new ValidationMessageList();
             CarDTOWithBodyType carDto = _carsService.GetCar(id, messages);
 
             if (messages.HasError)
             {
-                var error = messages.Where(m => m.Type == MessageTypes.Error).Select(m => m.Text).FirstOrDefault();
+                var error = messages.GetFirstErrorMsg;
                 ViewBag.error = error;
                 return HttpNotFound();
             }
@@ -185,7 +184,6 @@ namespace CarLookUp.Controllers
             return View(carVm);
         }
 
-        // POST: CarsView/Edit/5
         /// <summary>
         /// Edits the car by specified identifier.
         /// </summary>
@@ -198,30 +196,23 @@ namespace CarLookUp.Controllers
         {
             if (ModelState.IsValid)
             {
-                ValidationMassageList messages = new ValidationMassageList();
-                CarDTOWithBodyType carDto = _carsService.GetCar(id, messages);
+                ValidationMessageList messages = new ValidationMessageList();
+                CarDTOWithBodyType carDto = Mapper.Map<CarDTOWithBodyType>(car);
+                _carsService.Edit(id, carDto, messages);
 
                 if (messages.HasError)
                 {
-                    var error = messages.Where(m => m.Type == MessageTypes.Error).Select(m => m.Text).FirstOrDefault();
+                    var error = messages.GetFirstErrorMsg;
                     ModelState.AddModelError(string.Empty, error);
+                    GetBodyTypes();
                     return View(car);
-                }
-                carDto = Mapper.Map<CarDTOWithBodyType>(car);
-                messages.Clear();
-                _carsService.Edit(carDto, messages);
-                if (messages.HasError)
-                {
-                    var error = messages.Where(m => m.Type == MessageTypes.Error).Select(m => m.Text).FirstOrDefault();
-                    ViewBag.error = error;
-                    return RedirectToAction("ServerError", "Error");
                 }
                 return RedirectToAction("Index");
             }
+            GetBodyTypes();
             return View(car);
         }
 
-        // GET: CarsView
         /// <summary>
         /// Index view for car collection.
         /// </summary>
@@ -233,6 +224,14 @@ namespace CarLookUp.Controllers
             ICollection<CarVM> vms = Mapper.Map<ICollection<CarVM>>(dtos);
 
             return View(vms);
+        }
+
+        private void GetBodyTypes()
+        {
+            ICollection<SelectListItem> list = Mapper.Map<ICollection<SelectListItem>>(_carsService.GetAllBodyTypes());
+            //adding to call error condition on non-exist bodytype.
+            list.Add(new SelectListItem { Value = "999", Text = "Force Error" });
+            ViewBag.BodyTypes = list;
         }
     }
 }

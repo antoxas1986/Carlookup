@@ -29,9 +29,7 @@ namespace CarLookUp.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            ICollection<RoleDTO> dtos = _roleService.GetAll();
-            ICollection<SelectListItem> vms = Mapper.Map<ICollection<SelectListItem>>(dtos);
-            ViewBag.Roles = vms;
+            GetRoles();
             return View();
         }
 
@@ -50,7 +48,7 @@ namespace CarLookUp.Controllers
             }
             UserDTO dto = Mapper.Map<UserDTO>(model);
 
-            ValidationMassageList messages = new ValidationMassageList();
+            ValidationMessageList messages = new ValidationMessageList();
 
             _loginService.LoginUser(dto, messages);
 

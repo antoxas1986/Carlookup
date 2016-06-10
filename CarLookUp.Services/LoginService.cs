@@ -20,7 +20,7 @@ namespace CarLookUp.Services
         /// </summary>
         /// <param name="user">The user.</param>
         /// <param name="messages">The validation messages.</param>
-        public void LoginUser(UserDTO user, ValidationMassageList messages)
+        public void LoginUser(UserDTO user, ValidationMessageList messages)
         {
             RoleDTO role = _roleService.GetById(user.Role.Id);
 

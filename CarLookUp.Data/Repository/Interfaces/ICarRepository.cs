@@ -14,7 +14,7 @@ namespace CarLookUp.Data.Repository.Interfaces
         /// </summary>
         /// <param name="car">The car.</param>
         /// <returns></returns>
-        Car AddCar(CarDTOWithBodyType car);
+        void AddCar(CarDTOWithBodyType car);
 
         /// <summary>
         /// Deletes the car by identifier.
@@ -22,7 +22,12 @@ namespace CarLookUp.Data.Repository.Interfaces
         /// <param name="id">The identifier.</param>
         void DeleteCar(int id);
 
-        void Edit(CarDTOWithBodyType carDto);
+        /// <summary>
+        /// Edits the specified car dto.
+        /// </summary>
+        /// <param name="carDto">The car dto.</param>
+        /// <param name="messages">The messages.</param>
+        void Edit(CarDTOWithBodyType carDto, ValidationMessageList messages);
 
         /// <summary>
         /// Gets all cars.

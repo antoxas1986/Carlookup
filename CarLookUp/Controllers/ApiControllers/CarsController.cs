@@ -50,7 +50,7 @@ namespace CarLookUp.Web.Controllers.ApiContollers
         /// <returns></returns>
         public HttpResponseMessage Get(int id)
         {
-            ValidationMassageList messages = new ValidationMassageList();
+            ValidationMessageList messages = new ValidationMessageList();
             CarDTO car = _carsService.GetCar(id, messages);
             if (car != null)
             {
@@ -68,11 +68,12 @@ namespace CarLookUp.Web.Controllers.ApiContollers
         {
             if (ModelState.IsValid)
             {
+                ValidationMessageList messages = new ValidationMessageList();
                 var newCar = new CarDTOWithBodyType();
                 newCar.Maker = car.Maker;
                 newCar.Model = car.Model;
                 newCar.Year = car.Year;
-                _carsService.AddCar(newCar);
+                _carsService.AddCar(newCar, messages);
             }
             return Request.CreateResponse("Car added");
         }
@@ -85,7 +86,7 @@ namespace CarLookUp.Web.Controllers.ApiContollers
         /// <returns></returns>
         public HttpResponseMessage Put(int id, CarVM car)
         {
-            ValidationMassageList messages = new ValidationMassageList();
+            ValidationMessageList messages = new ValidationMessageList();
             var newCar = _carsService.GetCar(id, messages);
             if (newCar != null && ModelState.IsValid)
             {

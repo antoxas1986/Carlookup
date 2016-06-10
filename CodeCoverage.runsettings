@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="Code Coverage" uri="datacollector://Microsoft/CodeCoverage/2.0" assemblyQualifiedName="Microsoft.VisualStudio.Coverage.DynamicCoverageDataCollector, Microsoft.VisualStudio.TraceCollector, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <Configuration>
+          <CodeCoverage>
+
+            <ModulePaths>
+              <Include>
+                <ModulePath>.*CarLookUp.*</ModulePath>
+              </Include>
+              <Exclude>
+                <ModulePath>.*UnitTest.*</ModulePath>
+                <ModulePath>.*xunit.core.*</ModulePath>
+              </Exclude>
+            </ModulePaths>
+
+            <Functions>
+              <Exclude>
+                <Function>^CarLookUp.Core.Ioc\..*</Function>
+                <Function>^CarLookUp.Core.Models\..*</Function>
+
+                <Function>^CarLookUp.Data.Context\..*</Function>
+                <Function>^CarLookUp.Data.Entities\..*</Function>
+                <Function>^CarLookUp.Data.Migrations\..*</Function>
+                <Function>^CarLookUp.Data.Ioc\..*</Function>
+
+                <Function>^CarLookUp.Services.Ioc\..*</Function>
+
+                <Function>^CarLookUp.Web.Ioc\..*</Function>
+                <Function>^CarLookUp.Areas.HelpPage\..*</Function>
+                <Function>^CarLookUp.Web.ViewModels\..*</Function>
+
+                <Function>.*\.ElmahInitializer\..*</Function>
+                <Function>.*\.BundleConfig\..*</Function>
+                <Function>.*\.FilterConfig\..*</Function>
+                <Function>.*\.RouteConfig\..*</Function>
+                <Function>.*\.WebApiConfig\..*</Function>
+              </Exclude>
+            </Functions>
+
+            <UseVerifiableInstrumentation>True</UseVerifiableInstrumentation>
+            <AllowLowIntegrityProcesses>True</AllowLowIntegrityProcesses>
+            <CollectFromChildProcesses>True</CollectFromChildProcesses>
+            <CollectAspDotNet>False</CollectAspDotNet>
+          </CodeCoverage>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>
