@@ -12,7 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 
-namespace CarLookUp.Controllers
+namespace CarLookUp.Web.Controllers
 {
     /// <summary>
     /// Controller for cars
@@ -58,6 +58,12 @@ namespace CarLookUp.Controllers
 
                 _carsService.AddCar(newCar, messages);
 
+                if (messages.HasError)
+                {
+                    var error = messages.GetFirstErrorMsg;
+                    ModelState.AddModelError(string.Empty, error);
+                    return View(car);
+                }
                 DetailsEmailVM email = new DetailsEmailVM(EmailSettings.DETAILS_EMAIL)
                 {
                     Subject = "New car created.",
@@ -164,12 +170,8 @@ namespace CarLookUp.Controllers
         [MvcAuthorization(Roles = Roles.ADMIN)]
         public ActionResult Edit(int id)
         {
-            ICollection<SelectListItem> list = Mapper.Map<ICollection<SelectListItem>>(_carsService.GetAllBodyTypes());
+            GetBodyTypes();
 
-            //adding to call error condition on non-exist bodytype.
-            list.Add(new SelectListItem { Value = "999", Text = "Force Error" });
-
-            ViewBag.BodyTypes = list;
             ValidationMessageList messages = new ValidationMessageList();
             CarDTOWithBodyType carDto = _carsService.GetCar(id, messages);
 

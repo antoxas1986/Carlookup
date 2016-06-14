@@ -2,13 +2,9 @@
 using CarLookUp.Core.ApplicationSettings;
 using CarLookUp.Core.Utilities;
 using CarLookUp.Web.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
-namespace CarLookUp.Controllers
+namespace CarLookUp.Web.Controllers
 {
     /// <summary>
     /// Just home controller

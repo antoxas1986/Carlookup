@@ -9,7 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace CarLookUp.Controllers
+namespace CarLookUp.Web.Controllers
 {
     /// <summary>
     /// Login controller
@@ -54,7 +54,7 @@ namespace CarLookUp.Controllers
 
             if (messages.HasError)
             {
-                string error = messages.Where(m => m.Type == MessageTypes.Error).Select(m => m.Text).FirstOrDefault();
+                string error = messages.GetFirstErrorMsg;
                 ModelState.AddModelError(string.Empty, error);
                 GetRoles();
                 return View("Index", model);

@@ -27,9 +27,9 @@ namespace CarLookUp.Data.Repository
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public ICollection<T> GetAll<T>()
+        public ICollection<BodyTypeDTO> GetAll()
         {
-            return _db.BodyTypes.ProjectTo<T>().ToList();
+            return _db.BodyTypes.ProjectTo<BodyTypeDTO>().ToList();
         }
 
         /// <summary>

@@ -1,6 +1,6 @@
-﻿using CarLookUp.Controllers;
-using CarLookUp.Core.Models;
+﻿using CarLookUp.Core.Models;
 using CarLookUp.Services.Interfaces;
+using CarLookUp.Web.Controllers;
 using CarLookUp.Web.Mappers;
 using Moq;
 using System;
@@ -21,12 +21,12 @@ namespace CarLookUp.UnitTest.Web.Controllers
             AutoMapperConfig.Execute();
         }
 
-        //[Fact]
-        //public void Create_Valid_Exception()
-        //{
-        //    //Exception ex = Assert.Throws<Exception>(() => _sut.Create());
-        //    //Assert.Equal("another exception", ex.Message);
-        //}
+        [Fact]
+        public void Create_Valid_Exception()
+        {
+            Exception ex = Assert.Throws<Exception>(() => _sut.Create());
+            Assert.Equal("another exception", ex.Message);
+        }
 
         [Fact]
         public void Details_Invalid_Null_Role()
@@ -47,6 +47,13 @@ namespace CarLookUp.UnitTest.Web.Controllers
             };
             _roleService.Setup(r => r.GetById(1)).Returns(role);
             ViewResult actual = _sut.Details(1) as ViewResult;
+            Assert.Equal("", actual.ViewName);
+        }
+
+        [Fact]
+        public void Index_Valid()
+        {
+            ViewResult actual = _sut.Index() as ViewResult;
             Assert.Equal("", actual.ViewName);
         }
     }

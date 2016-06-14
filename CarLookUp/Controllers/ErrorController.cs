@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace CarLookUp.Controllers
+namespace CarLookUp.Web.Controllers
 {
     /// <summary>
     /// Custom view error controller

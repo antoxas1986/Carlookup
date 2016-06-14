@@ -6,7 +6,7 @@ using CarLookUp.Data.Repository.Interfaces;
 using CarLookUp.Services.Interfaces;
 using System.Collections.Generic;
 
-namespace CarLookUp.Services.CarServices
+namespace CarLookUp.Services
 {
     /// <summary>
     /// Service to interact with cars
@@ -93,7 +93,7 @@ namespace CarLookUp.Services.CarServices
             ICollection<BodyTypeDTO> list = (ICollection<BodyTypeDTO>)GlobalCachingProvider.Instance.GetItem(CacheKeys.BODYTYPES);
             if (list == null)
             {
-                list = _bodyTypeRepo.GetAll<BodyTypeDTO>();
+                list = _bodyTypeRepo.GetAll();
                 GlobalCachingProvider.Instance.AddItem(CacheKeys.BODYTYPES, list);
             }
             return list;

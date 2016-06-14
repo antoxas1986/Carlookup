@@ -51,7 +51,7 @@ namespace CarLookUp.Data.Repository
         /// <param name="carDto">The car dto.</param>
         public void Edit(CarDTOWithBodyType carDto, ValidationMessageList messages)
         {
-            Car car = _db.Cars.Find(carDto.Id);
+            Car car = _db.Cars.Where(c => c.Id == carDto.Id).FirstOrDefault();
             if (car == null)
             {
                 messages.Add(new ValidationMessage(MessageTypes.Error, ErrorMessages.NO_CAR));

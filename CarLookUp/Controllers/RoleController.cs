@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace CarLookUp.Controllers
+namespace CarLookUp.Web.Controllers
 {
     /// <summary>
     /// Controller to work with roles
@@ -22,6 +22,11 @@ namespace CarLookUp.Controllers
         public RoleController(IRoleService roleService)
         {
             _roleService = roleService;
+        }
+
+        public ActionResult Create()
+        {
+            throw new Exception("another exception");
         }
 
         /// <summary>
@@ -51,7 +56,6 @@ namespace CarLookUp.Controllers
         {
             ICollection<RoleDTO> dtos = _roleService.GetAll();
             ICollection<RoleVM> vms = Mapper.Map<ICollection<RoleVM>>(dtos);
-            //throw new Exception("Test");
             return View(vms);
         }
     }

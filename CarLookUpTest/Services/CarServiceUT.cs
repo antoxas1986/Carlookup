@@ -2,7 +2,7 @@
 using CarLookUp.Core.Enum;
 using CarLookUp.Core.Models;
 using CarLookUp.Data.Repository.Interfaces;
-using CarLookUp.Services.CarServices;
+using CarLookUp.Services;
 using CarLookUp.Web.Mappers;
 using Moq;
 using System;
@@ -204,7 +204,7 @@ namespace CarLookUp.UnitTest.Services
                 new BodyTypeDTO(),
                 new BodyTypeDTO()
             };
-            _bodyRepo.Setup(b => b.GetAll<BodyTypeDTO>()).Returns(_list);
+            _bodyRepo.Setup(b => b.GetAll()).Returns(_list);
             ICollection<BodyTypeDTO> actual = _sut.GetAllBodyTypes();
             Assert.Equal(actual.Count, _carList.Count);
         }

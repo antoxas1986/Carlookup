@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using CarLookUp.Services.CarServices;
 using CarLookUp.Services.Interfaces;
 
 namespace CarLookUp.Services.Ioc

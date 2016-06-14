@@ -1,4 +1,5 @@
-﻿using CarLookUp.Core.Models;
+﻿using CarLookUp.Core.Constants;
+using CarLookUp.Core.Models;
 using CarLookUp.Data.Context.Interfaces;
 using CarLookUp.Data.Entities;
 using CarLookUp.Data.Repository;
@@ -49,7 +50,7 @@ namespace CarLookUp.UnitTest.Data.Repository
             AutoMapperConfig.Execute();
         }
 
-        //[Fact]
+        [Fact]
         public void AddCar_CarDTO_Valid()
         {
             CarDTOWithBodyType car = new CarDTOWithBodyType
@@ -61,13 +62,42 @@ namespace CarLookUp.UnitTest.Data.Repository
                 BodyTypeId = 1
             };
             _sut.AddCar(car);
-            _db.Object.SaveChanges();
 
-            //_db.Setup(r => r.Cars.Add(It.IsAny<Car>())).Returns(car);
-            //_db.Verify(d => d.Cars.Add(It.IsAny<Car>()), Times.Once());
+            _carSet.Verify(d => d.Add(It.IsAny<Car>()), Times.Once());
+        }
 
-            Car actual = _db.Object.Cars.Where(c => c.Id == 5).FirstOrDefault();
-            Assert.Equal(actual.Id, car.Id);
+        [Fact]
+        public void Edit_CarDTO_Invalid()
+        {
+            ValidationMessageList messages = new ValidationMessageList();
+            CarDTOWithBodyType carDto = new CarDTOWithBodyType
+            {
+                Id = 5,
+                Maker = "Test",
+                Model = "Test",
+                Year = 2005,
+                BodyTypeId = 1
+            };
+
+            _sut.Edit(carDto, messages);
+            Assert.Equal(ErrorMessages.NO_CAR, messages.GetFirstErrorMsg);
+        }
+
+        [Fact]
+        public void Edit_CarDTO_Valid()
+        {
+            ValidationMessageList messages = new ValidationMessageList();
+            CarDTOWithBodyType carDto = new CarDTOWithBodyType
+            {
+                Id = 1,
+                Maker = "Test",
+                Model = "Test",
+                Year = 2005,
+                BodyTypeId = 1
+            };
+
+            _sut.Edit(carDto, messages);
+            Assert.Null(messages.GetFirstErrorMsg);
         }
 
         [Fact]

@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace CarLookUp.Web.Controllers.ApiContollers
+namespace CarLookUp.Web.Controllers.ApiControllers
 {
     /// <summary>
     ///Controller for cars

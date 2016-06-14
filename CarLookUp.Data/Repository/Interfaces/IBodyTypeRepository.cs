@@ -14,7 +14,7 @@ namespace CarLookUp.Data.Repository.Interfaces
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        ICollection<T> GetAll<T>();
+        ICollection<BodyTypeDTO> GetAll();
 
         /// <summary>
         /// Gets the bodytype by identifier.
